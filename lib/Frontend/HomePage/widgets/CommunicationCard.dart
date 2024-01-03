@@ -5,7 +5,18 @@ import 'package:page_transition/page_transition.dart';
 import '../../CommunicationChats/ChatPageCommunication.dart';
 
 class CommunicationCards extends StatefulWidget {
-  const CommunicationCards({super.key});
+  const CommunicationCards({
+    super.key,
+    required this.title,
+    required this.lastMessage,
+    required this.members,
+    required this.image,
+  });
+
+  final String title;
+  final String lastMessage;
+  final List<String> members;
+  final String image;
 
   @override
   State<CommunicationCards> createState() => _CommunicationCardsState();
@@ -61,15 +72,14 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               Container(
-                      width: MediaQuery.of(context).size.width * 0.08,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xFFFD84B6),
-                      ),
-                      height: 3,
-                      
-                    ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.08,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Color(0xFFFD84B6),
+                                ),
+                                height: 3,
+                              ),
                               Text(
                                 'Name Chats',
                                 style: TextStyle(
@@ -77,21 +87,32 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                                     fontSize: 23,
                                     fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 6,),
-                              
+                              SizedBox(
+                                height: 6,
+                              ),
                               Container(
-                  width: MediaQuery.of(context).size.width * 0.24,
-                  child: Stack(
-                    children: [
-                      CircleAvatar(radius: 16,backgroundColor: Color(0xFFC38250),),
-                      Positioned(left:16,child: CircleAvatar(radius: 16,backgroundColor: Color(0xFFBB4572),)),
-                      Positioned(left: 32,child: CircleAvatar(radius: 16,backgroundColor: Color(0xFF1B1168),))
-                
-                
-                
-                    ],
-                  ),
-                )
+                                width: MediaQuery.of(context).size.width * 0.24,
+                                child: Stack(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 16,
+                                      backgroundColor: Color(0xFFC38250),
+                                    ),
+                                    Positioned(
+                                        left: 16,
+                                        child: CircleAvatar(
+                                          radius: 16,
+                                          backgroundColor: Color(0xFFBB4572),
+                                        )),
+                                    Positioned(
+                                        left: 32,
+                                        child: CircleAvatar(
+                                          radius: 16,
+                                          backgroundColor: Color(0xFF1B1168),
+                                        ))
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -147,8 +168,6 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                       Container(
                         child: Row(
                           children: [
-                      
-                            
                             Container(
                               padding: EdgeInsets.all(8),
                               decoration: BoxDecoration(
@@ -191,21 +210,19 @@ class _CommunicationCardsState extends State<CommunicationCards> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        //ChatPageCommunication
+      onTap: () {
         Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child:ChatPageCommunication(),
-                                isIos: true,
-                                duration: Duration(milliseconds: 1600)));
+            context,
+            PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child: ChatPageCommunication(),
+                isIos: true,
+                duration: Duration(milliseconds: 1600)));
       },
       onLongPress: () {
         _showProfiles(context);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.6,
         height: MediaQuery.of(context).size.height * 0.2,
         padding: EdgeInsets.all(9),
         decoration: BoxDecoration(
@@ -228,6 +245,15 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13),
                           color: Color(0xFFA0858D)),
+                      child: Center(
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(13),
+                            child: Image.network(
+                              widget.image,
+                              width: MediaQuery.of(context).size.width * 0.1,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            )),
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -243,17 +269,16 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                           
-                    SizedBox(height: 6,),
+                            SizedBox(
+                              height: 6,
+                            ),
                             Text(
-                              'Higland Collage',
+                              widget.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
                             ),
-                        
-                          
                           ],
                         ),
                       ],
@@ -291,16 +316,29 @@ class _CommunicationCardsState extends State<CommunicationCards> {
                 ],
               ),
             ),
-           Container(
-                  width: MediaQuery.of(context).size.width * 0.24,
-                  child: Stack(
-                    children: [
-                      CircleAvatar(radius: 16,backgroundColor: Color(0xFFC38250),),
-                      Positioned(left:16,child: CircleAvatar(radius: 16,backgroundColor: Color(0xFFBB4572),)),
-                      Positioned(left: 32,child: CircleAvatar(radius: 16,backgroundColor: Color(0xFF1B1168),))
-                    ],
+            Container(
+              width: MediaQuery.of(context).size.width * 0.24,
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundColor: Color(0xFFC38250),
                   ),
-                )
+                  Positioned(
+                      left: 16,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Color(0xFFBB4572),
+                      )),
+                  Positioned(
+                      left: 32,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Color(0xFF1B1168),
+                      ))
+                ],
+              ),
+            )
           ],
         ),
       ),
